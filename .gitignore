@@ -1,0 +1,50 @@
+# =====================
+# Python
+# =====================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+.env
+.venv/
+venv/
+ENV/
+
+# logs
+*.log
+
+# pytest
+.pytest_cache/
+
+# =====================
+# FastAPI / Uvicorn
+# =====================
+*.sqlite3
+
+# =====================
+# IDE
+# =====================
+.vscode/
+.idea/
+
+# =====================
+# OS
+# =====================
+.DS_Store
+Thumbs.db
+
+# =====================
+# Node (frontend React)
+# =====================
+node_modules/
+dist/
+build/
+
+# env frontend
+frontend/.env
+
+# =====================
+# Docker
+# =====================
+*.pid
