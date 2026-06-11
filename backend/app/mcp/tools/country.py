@@ -4,13 +4,37 @@ def get_country_profile(params: dict):
     country = params.get("country", "cote d ivoire")
 
     url = f"https://restcountries.com/v3.1/name/{country}"
-    response = httpx.get(url)
 
-    data = response.json()[0]
+    try:
+        response = httpx.get(url, timeout=10)
+        response.raise_for_status()
 
-    return {
-        "name": data["name"]["common"],
-        "capital": data["capital"][0],
-        "population": data["population"],
-        "currency": list(data["currencies"].keys())[0]
-    }
+        data = response.json()
+
+        if not isinstance(data, list) or len(data) == 0:
+            return {
+                "error": "Country not found",
+                "raw": data
+            }
+
+        country_data = data[0]
+
+        return {
+            "name": country_data.get("name", {}).get("common"),
+            "capital": country_data.get("capital", ["N/A"])[0],
+            "population": country_data.get("population", None),
+            "currency": list(country_data.get("currencies", {}).keys())[0]
+            if country_data.get("currencies") else None
+        }
+
+    except httpx.HTTPError as e:
+        return {
+            "error": "HTTP error calling API",
+            "details": str(e)
+        }
+
+    except Exception as e:
+        return {
+            "error": "Unexpected backend error",
+            "details": str(e)
+        }
