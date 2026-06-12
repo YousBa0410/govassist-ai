@@ -60,12 +60,7 @@ const WelcomeContainer = styled(Box)(({ theme }) => ({
     padding: theme.spacing(4),
 }));
 
-const ChatInterface = ({
-                           conversationId,
-                           conversations,
-                           setConversations,
-                           onConversationChange
-                       }) => {
+const ChatInterface = ({conversationId, conversations, setConversations, onConversationChange}) => {
     const [inputMessage, setInputMessage] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const { callMCP, isLoading, error, toolExecution, clearError } = useMCP();
@@ -184,7 +179,7 @@ const ChatInterface = ({
                             🇨🇮 eGov Assistant
                         </Typography>
                         <Typography variant="body1" color="text.secondary" sx={{ mb: 4, maxWidth: 500 }}>
-                            Posez vos questions sur les services gouvernementaux en langage naturel
+                            Posez vos questions sur les services gouvernementaux.
                         </Typography>
 
                         <Box sx={{ position: 'relative', width: '100%', maxWidth: 700, mx: 'auto' }}>
